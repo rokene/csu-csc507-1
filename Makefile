@@ -9,7 +9,7 @@ MODULE2=$(CURRENT_DIR)/module-2
 MODULE2_MILESTONE=$(MODULE2)/milestone
 
 MODULE3=$(CURRENT_DIR)/module-3
-MODULE3_CRITICAL_THINKING=$(MODULE3)/critical-thinking
+MODULE3_MILESTONE=$(MODULE3)/milestone
 
 MODULE5=$(CURRENT_DIR)/module-5
 MODULE5_CRITICAL_THINKING=$(MODULE5)/critical-thinking
@@ -34,6 +34,15 @@ m2p: ## executes module 2 portfolio milestone
 	@echo "executing module 2 portfolio milestone ..."
 	@cd $(MODULE2_MILESTONE) && ./numbers.sh
 	@echo "completed module 2 portfolio milestone."
+
+.PHONY: m3p
+m3p: ## executes module 3 portfolio milestone
+	@echo "executing module 3 portfolio milestone ..."
+	@cd $(MODULE3_MILESTONE) && ./numbers.sh
+	@echo "executing python variant"
+	@cd $(MODULE3_MILESTONE) && ./numbers.py
+	@cd $(MODULE3_MILESTONE) && ./numbers-mp.py
+	@echo "completed module 3 portfolio milestone."
 
 # .PHONY: m3
 # m3: ## executes module 3 critical thinking
