@@ -11,11 +11,9 @@ MODULE2_MILESTONE=$(MODULE2)/milestone
 MODULE3=$(CURRENT_DIR)/module-3
 MODULE3_MILESTONE=$(MODULE3)/milestone
 
-MODULE5=$(CURRENT_DIR)/module-5
-MODULE5_CRITICAL_THINKING=$(MODULE5)/critical-thinking
-
-MODULE7=$(CURRENT_DIR)/module-7
-MODULE7_CRITICAL_THINKING=$(MODULE7)/critical-thinking
+MODULE4=$(CURRENT_DIR)/module-4
+MODULE4_CRITICAL_THINKING=$(MODULE4)/critical-thinking
+MODULE4_MILESTONE=$(MODULE4)/milestone
 
 PP=$(CURRENT_DIR)/portfolio-project
 
@@ -44,26 +42,8 @@ m3p: ## executes module 3 portfolio milestone
 	@cd $(MODULE3_MILESTONE) && ./numbers-mp.py
 	@echo "completed module 3 portfolio milestone."
 
-# .PHONY: m3
-# m3: ## executes module 3 critical thinking
-# 	@echo "executing module 3 critical thinking ..."
-# 	@cd $(MODULE3_CRITICAL_THINKING); ./app.py
-# 	@echo "completed module 3 critical thinking."
-
-# .PHONY: m5
-# m5: ## executes module 5 critical thinking
-# 	@echo "executing module 5 critical thinking ..."
-# 	@cd $(MODULE5_CRITICAL_THINKING); ./app.py
-# 	@echo "completed module 5 critical thinking."
-
-# .PHONY: m7
-# m7: ## executes module 7 critical thinking
-# 	@echo "executing module 7 critical thinking ..."
-# 	@cd $(MODULE7_CRITICAL_THINKING); ./app.py
-# 	@echo "completed module 7 critical thinking."
-
-# .PHONY: pp
-# pp: ## executes portfolio project
-# 	@echo "executing portfolio project ..."
-# 	@cd $(PP); ./app.py
-# 	@echo "completed portfolio project."
+.PHONY: m4
+m4: ## executes module 4 critical thinking
+	@echo "executing module 4 critical thinking ..."
+	@cd $(MODULE4_CRITICAL_THINKING) && ./first_fit.py
+	@echo "completed module 4 critical thinking."
