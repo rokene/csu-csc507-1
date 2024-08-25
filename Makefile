@@ -47,3 +47,17 @@ m4: ## executes module 4 critical thinking
 	@echo "executing module 4 critical thinking ..."
 	@cd $(MODULE4_CRITICAL_THINKING) && ./first_fit.py
 	@echo "completed module 4 critical thinking."
+
+.PHONY: m4p
+m4p: ## executes module 4 portfolio milestone
+	@echo "executing module 4 portfolio milestone ..."
+	@echo "cleaning up old data files"
+	@cd $(MODULE4_MILESTONE) && rm *.txt
+	@echo "generating base numbers files"
+	@cd $(MODULE4_MILESTONE) && ./numbers.sh
+	@cd $(MODULE4_MILESTONE) && ./numbers.py
+	@echo "doubling numbers"
+	@cd $(MODULE4_MILESTONE) && ./double_numbers.sh
+	@echo "doubling numbers using python 3 diff methods"
+	@cd $(MODULE4_MILESTONE) && ./double_numbers.py
+	@echo "completed module 4 portfolio milestone."
