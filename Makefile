@@ -15,6 +15,9 @@ MODULE4=$(CURRENT_DIR)/module-4
 MODULE4_CRITICAL_THINKING=$(MODULE4)/critical-thinking
 MODULE4_MILESTONE=$(MODULE4)/milestone
 
+MODULE6=$(CURRENT_DIR)/module-6
+MODULE6_CRITICAL_THINKING=$(MODULE6)/critical-thinking
+
 PP=$(CURRENT_DIR)/portfolio-project
 
 .PHONY: help
@@ -61,3 +64,12 @@ m4p: ## executes module 4 portfolio milestone
 	@echo "doubling numbers using python 3 diff methods"
 	@cd $(MODULE4_MILESTONE) && ./double_numbers.py
 	@echo "completed module 4 portfolio milestone."
+
+.PHONY: m6
+m6: ## executes module 6 critical thinking
+	@echo "executing module 6 critical thinking ..."
+	@cd $(MODULE6_CRITICAL_THINKING) && \
+		rm *.txt*; \
+		./numbers.py && \
+		./analysis.py
+	@echo "completed module 6 critical thinking."
