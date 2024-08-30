@@ -79,7 +79,7 @@ pp: ## executes portfolio project
 	@echo "pp: starting portfolio project"
 	@cd $(PP) && \
 		echo "pp: clean up" && \
-		rm *.txt && \
+		rm *.txt* && \
 		echo "pp: starting analysis" && \
 		./generate_data.py && \
 		./analysis.py

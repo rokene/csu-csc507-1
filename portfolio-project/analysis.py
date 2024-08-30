@@ -3,6 +3,7 @@
 import time
 import multiprocessing
 import os
+import shutil
 
 # functions and constants
 
@@ -55,13 +56,14 @@ def parallel_sum(file1, file2, output_file, num_parts):
     Split the task into parts and sum files in parallel.
     """
     start_time = time.time()
-    file1_size = count_lines(file1)
-    file2_size = count_lines(file2)
+    file1_lines = count_lines(file1)
+    file1_size = os.path.getsize(file1)
+    file2_size = os.path.getsize(file2)
 
     if file1_size != file2_size:
         ValueError(f"Source file sizes must match: {file1_size}, {file2_size}")
 
-    total_lines = file1_size
+    total_lines = file1_lines
     lines_per_part = total_lines // num_parts
 
     # Create and start a process for each part
@@ -77,15 +79,22 @@ def parallel_sum(file1, file2, output_file, num_parts):
 
     # Wait for all processes to complete
     for p in processes:
-        p.join()
+        p.join(timeout=600)
+        print(f"{script_name}: Process {p} synced.")
+        
+    if any(p.is_alive() for p in processes):
+        Exception(f"{script_name}: Error, some processes did not finish successfully.")
 
     # Combine part files into a single final output
-    print(f"{script_name}: Combining parts")
-    with open(output_file, 'w') as final_out:
-        for i in range(num_parts):
-            part_output = f"{output_file}_part_{i}"
-            with open(part_output, 'r') as part_in:
-                final_out.writelines(part_in.readlines())
+    try:
+        with open(output_file, 'w') as final_out:
+            for i in range(num_parts):
+                part_output = f"{output_file}_part_{i}"
+                print(f"{script_name}: Combining results in {part_output}")
+                with open(part_output, 'r') as part_in:
+                    shutil.copyfileobj(part_in, final_out)
+    except Exception as e:
+        print(f"Error combining parts: {str(e)}")
 
     end_time = time.time()
     return end_time - start_time
