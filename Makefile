@@ -73,3 +73,14 @@ m6: ## executes module 6 critical thinking
 		./numbers.py && \
 		./analysis.py
 	@echo "completed module 6 critical thinking."
+
+.PHONY: pp
+pp: ## executes portfolio project
+	@echo "pp: starting portfolio project"
+	@cd $(PP) && \
+		echo "pp: clean up" && \
+		rm *.txt && \
+		echo "pp: starting analysis" && \
+		./generate_data.py && \
+		./analysis.py
+	@echo "pp: completed portfolio project"
