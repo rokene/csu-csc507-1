@@ -5,6 +5,7 @@ import multiprocessing
 import os
 import shutil
 
+
 # functions and constants
 
 
@@ -19,16 +20,6 @@ def count_lines(filename):
     except FileNotFoundError:
         print(f"{script_name}: File {filename} not found.")
         return 0
-
-
-def sum_files(file1, file2, output_file):
-    """
-    Sum corresponding lines from two files and write the results to a new file.
-    """
-    with open(file1, 'r') as f1, open(file2, 'r') as f2, open(output_file, 'w') as out:
-        for line1, line2 in zip(f1, f2):
-            sum_result = int(line1.strip()) + int(line2.strip())
-            out.write(f"{sum_result}\n")
 
 
 def worker(file1, file2, output_file, start, end):
@@ -93,11 +84,12 @@ def parallel_sum(file1, file2, output_file, num_parts):
                 print(f"{script_name}: Combining results in {part_output}")
                 with open(part_output, 'r') as part_in:
                     shutil.copyfileobj(part_in, final_out)
+                os.remove(part_output)
     except Exception as e:
         print(f"Error combining parts: {str(e)}")
 
     end_time = time.time()
-    return end_time - start_time
+    return end_time - start_time, file1_lines
 
 
 def main():
@@ -105,10 +97,10 @@ def main():
     filename1 = 'hugefile1.txt'
     filename2 = 'hugefile2.txt'
     output_filename = 'totalfile.txt'
-    num_parts = 10  # Number of parts to divide the processing
-    time_taken = parallel_sum(filename1, filename2, output_filename, num_parts)
-    print(f"{script_name}: Time taken to process and sum files using multiprocessing: {time_taken:.2f} seconds")
-
+    num_parts = 6  # Number of parts to divide the processing
+    time_taken_sec, lines = parallel_sum(filename1, filename2, output_filename, num_parts)
+    print(f"{script_name}: Time taken to process and sum files using multiprocessing: {time_taken_sec:2f} second(s)")
+    print(f"{script_name}: Rate of processing, {lines/time_taken_sec} lines/second")
 
 if __name__ == "__main__":
     main()
