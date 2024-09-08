@@ -97,9 +97,35 @@ def main():
     filename1 = 'hugefile1.txt'
     filename2 = 'hugefile2.txt'
     output_filename = 'totalfile.txt'
-    num_parts = 6  # Number of parts to divide the processing
+
+    num_parts = 2
     time_taken_sec, lines = parallel_sum(filename1, filename2, output_filename, num_parts)
-    print(f"{script_name}: Time taken to process and sum files using multiprocessing: {time_taken_sec:2f} second(s)")
+    print(f"{script_name}: Time taken to process and sum files using multiprocessing ({num_parts}): {time_taken_sec:2f} second(s)")
+    print(f"{script_name}: Rate of processing, {lines/time_taken_sec} lines/second")
+
+    num_parts = 6
+    time_taken_sec, lines = parallel_sum(filename1, filename2, output_filename, num_parts)
+    print(f"{script_name}: Time taken to process and sum files using multiprocessing ({num_parts}): {time_taken_sec:2f} second(s)")
+    print(f"{script_name}: Rate of processing, {lines/time_taken_sec} lines/second")
+
+    num_parts = 10
+    time_taken_sec, lines = parallel_sum(filename1, filename2, output_filename, num_parts)
+    print(f"{script_name}: Time taken to process and sum files using multiprocessing ({num_parts}): {time_taken_sec:2f} second(s)")
+    print(f"{script_name}: Rate of processing, {lines/time_taken_sec} lines/second")
+
+    num_parts = 15
+    time_taken_sec, lines = parallel_sum(filename1, filename2, output_filename, num_parts)
+    print(f"{script_name}: Time taken to process and sum files using multiprocessing ({num_parts}): {time_taken_sec:2f} second(s)")
+    print(f"{script_name}: Rate of processing, {lines/time_taken_sec} lines/second")
+
+    num_parts = 20
+    time_taken_sec, lines = parallel_sum(filename1, filename2, output_filename, num_parts)
+    print(f"{script_name}: Time taken to process and sum files using multiprocessing ({num_parts}): {time_taken_sec:2f} second(s)")
+    print(f"{script_name}: Rate of processing, {lines/time_taken_sec} lines/second")
+
+    num_parts = 25
+    time_taken_sec, lines = parallel_sum(filename1, filename2, output_filename, num_parts)
+    print(f"{script_name}: Time taken to process and sum files using multiprocessing ({num_parts}): {time_taken_sec:2f} second(s)")
     print(f"{script_name}: Rate of processing, {lines/time_taken_sec} lines/second")
 
 if __name__ == "__main__":
